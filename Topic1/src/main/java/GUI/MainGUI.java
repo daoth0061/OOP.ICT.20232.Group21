@@ -1,6 +1,6 @@
 package GUI;
 
-import DataStructure.MyArrayList;
+import DataStructure.MyList;
 import DataStructure.MyLinkedList;
 import DataStructure.MyQueue;
 import DataStructure.MyStack;
@@ -15,8 +15,7 @@ import javafx.stage.Stage;
 public class MainGUI extends Application {
 
     // Data structures
-    private MyArrayList<Integer> arrayList;
-    private MyLinkedList<Integer> linkedList;
+    private MyList<Integer> list;
     private MyStack<Integer> stack;
     private MyQueue<Integer> queue;
 
@@ -32,8 +31,7 @@ public class MainGUI extends Application {
         this.primaryStage = primaryStage;
 
         // Initialize data structures
-        arrayList = new MyArrayList<>();
-        linkedList = new MyLinkedList<>();
+        list = new MyList<>();
         stack = new MyStack<>();
         queue = new MyQueue<>();
 
@@ -103,19 +101,19 @@ public class MainGUI extends Application {
         outputArea.appendText("List Operations:\n");
         switch (operation) {
             case "Create":
-                createList(arrayList);
+                createList(list);
                 break;
             case "Insert":
-                insertElement(arrayList);
+                insertElement(list);
                 break;
             case "Sort":
-                sortList(arrayList);
+                sortList(list);
                 break;
             case "Find":
-                findElement(arrayList);
+                findElement(list);
                 break;
             case "Delete":
-                deleteElement(arrayList);
+                deleteElement(list);
                 break;
         }
     }
