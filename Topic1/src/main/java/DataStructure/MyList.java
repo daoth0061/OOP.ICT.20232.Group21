@@ -4,7 +4,7 @@ public class MyList<E extends Comparable<E>> {
     private MyArrayList<E> arrayList;
 
     public MyList() {
-        arrayList = new MyArrayList<>();
+        arrayList = new MyArrayList<E>();
     }
 
     public void add(E element) {

@@ -1,10 +1,9 @@
 package DataStructure;
-
-public class MyQueue<E extends Comparable<E>> {
+public class MyStack<E extends Comparable<E>> {
     private MyLinkedList<E> linkedList;
 
-    public MyQueue() {
-        linkedList = new MyLinkedList<>();
+    public MyStack() {
+        linkedList = new MyLinkedList<E>();
     }
 
     public void add(E element) {
@@ -13,9 +12,9 @@ public class MyQueue<E extends Comparable<E>> {
 
     public E remove() {
         if (linkedList.size() == 0) {
-            throw new IllegalStateException("Queue is empty");
+            throw new IllegalStateException("Stack is empty");
         }
-        return linkedList.remove(0);
+        return linkedList.remove(linkedList.size() - 1);
     }
 
     public E get(int index) {
