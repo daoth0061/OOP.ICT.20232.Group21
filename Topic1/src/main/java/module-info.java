@@ -1,8 +1,8 @@
-module org.example.oopict20232group21 {
+module StackQueueListDemonstration {
     requires javafx.controls;
     requires javafx.fxml;
 
-
-    opens org.example.oopict20232group21 to javafx.fxml;
-    exports org.example.oopict20232group21;
+    opens GUI to javafx.fxml;
+    exports GUI;
+    exports DataStructure;
 }

@@ -1,37 +1,19 @@
 package DataStructure;
 
-public class MyQueue<E extends Comparable<E>> {
-    private MyLinkedList<E> linkedList;
-
-    public MyQueue() {
-        linkedList = new MyLinkedList<E>();
-    }
-
-    public void add(E element) {
-        linkedList.add(element);
-    }
-
-    public E remove() {
-        if (linkedList.size() == 0) {
-            throw new IllegalStateException("Queue is empty");
-        }
-        return linkedList.remove(0);
-    }
-
-    public E get(int index) {
-        return linkedList.get(index);
-    }
-
-    public int size() {
-        return linkedList.size();
-    }
-
-    public void sort() {
-        linkedList.sort();
-    }
-
+public class MyQueue<E extends Comparable<E>> extends MyLinkedList<E> {
     @Override
-    public String toString() {
-        return linkedList.toString();
+    public void insert(E element) {
+        enqueue(element);
+    }
+
+    public void enqueue(E element) {
+        super.insert(element);
+    }
+
+    public E dequeue() {
+        if (head == null) return null;
+        E element = head.element;
+        delete(element);
+        return element;
     }
 }

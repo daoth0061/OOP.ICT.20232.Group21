@@ -12,9 +12,7 @@ import javafx.stage.Stage;
 public class MainGUI extends Application {
 
     // Data structures
-    private MyList<Integer> list;
-    private MyStack<Integer> stack;
-    private MyQueue<Integer> queue;
+    private AbstractList<Integer> currentDataStructure;
 
     // GUI components
     private BorderPane mainMenuLayout;
@@ -24,18 +22,9 @@ public class MainGUI extends Application {
     private ChoiceBox<String> operationChoiceBox;
     private Stage primaryStage;
 
-    // Current selected data structure
-    private enum DataStructureType { LIST, STACK, QUEUE }
-    private DataStructureType currentDataStructureType;
-
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-
-        // Initialize data structures
-        list = new MyList<Integer>();
-        stack = new MyStack<>();
-        queue = new MyQueue<>();
 
         // Initialize main menu
         initializeMainMenu();
@@ -44,249 +33,205 @@ public class MainGUI extends Application {
         initializeDemonstrationLayout();
 
         // Show main menu
-        primaryStage.setScene(new Scene(mainMenuLayout, 400, 300));
-        primaryStage.setTitle("Data Structure Demo");
+        primaryStage.setScene(new Scene(mainMenuLayout, 800, 600));
+        primaryStage.setTitle("Data Structure Demonstration");
         primaryStage.show();
     }
 
     private void initializeMainMenu() {
-        // Main menu components
-        Label titleLabel = new Label("Data Structure Demo");
-        ChoiceBox<String> structureChoiceBox = new ChoiceBox<>();
-        structureChoiceBox.getItems().addAll("List", "Stack", "Queue");
-        structureChoiceBox.setValue("List"); // Default selection
-        Button proceedButton = new Button("Proceed");
-        Button helpButton = new Button("Help");
-        Button quitButton = new Button("Quit");
-
-        // Main menu layout
+        mainMenuLayout = new BorderPane();
         GridPane mainMenuPane = new GridPane();
         mainMenuPane.setPadding(new Insets(10));
         mainMenuPane.setHgap(10);
         mainMenuPane.setVgap(10);
-        mainMenuPane.addRow(0, titleLabel);
-        mainMenuPane.addRow(1, new Label("Select Data Structure:"), structureChoiceBox);
-        mainMenuPane.addRow(2, proceedButton);
-        mainMenuPane.addRow(3, helpButton);
-        mainMenuPane.addRow(4, quitButton);
-        mainMenuLayout = new BorderPane();
-        mainMenuLayout.setCenter(mainMenuPane);
 
-        // Set actions for buttons
-        proceedButton.setOnAction(e -> {
-            String selectedStructure = structureChoiceBox.getValue();
-            switch (selectedStructure) {
-                case "List":
-                    currentDataStructureType = DataStructureType.LIST;
-                    break;
-                case "Stack":
-                    currentDataStructureType = DataStructureType.STACK;
-                    break;
-                case "Queue":
-                    currentDataStructureType = DataStructureType.QUEUE;
-                    break;
-            }
-            showDemonstrationLayout();
-        });
+        Label titleLabel = new Label("Data Structure Demonstration");
+        mainMenuPane.add(titleLabel, 0, 0);
+
+        Button proceedButton = new Button("Proceed");
+        proceedButton.setOnAction(e -> showDemonstrationLayout());
+        mainMenuPane.add(proceedButton, 0, 1);
+
+        Button helpButton = new Button("Help");
         helpButton.setOnAction(e -> showHelp());
-        quitButton.setOnAction(e -> confirmQuit());
+        mainMenuPane.add(helpButton, 0, 2);
+
+        Button quitButton = new Button("Quit");
+        quitButton.setOnAction(e -> quitApplication());
+        mainMenuPane.add(quitButton, 0, 3);
+
+        mainMenuLayout.setCenter(mainMenuPane);
+    }
+
+    private void showDemonstrationLayout() {
+        primaryStage.setScene(new Scene(demonstrationLayout, 800, 600));
     }
 
     private void initializeDemonstrationLayout() {
-        // Demonstration components
+        demonstrationLayout = new BorderPane();
         demonstrationPane = new GridPane();
         demonstrationPane.setPadding(new Insets(10));
         demonstrationPane.setHgap(10);
         demonstrationPane.setVgap(10);
+
+        ChoiceBox<String> structureChoiceBox = new ChoiceBox<>();
+        structureChoiceBox.getItems().addAll("List", "Queue", "Stack");
+        demonstrationPane.add(new Label("Choose Data Structure:"), 0, 0);
+        demonstrationPane.add(structureChoiceBox, 1, 0);
+
+        Button createButton = new Button("Create");
+
+        createButton.setOnAction(e -> {
+            String selectedStructure = structureChoiceBox.getValue();
+            switch (selectedStructure) {
+                case "List":
+                    currentDataStructure = new MyList<>();
+                    break;
+                case "Queue":
+                    currentDataStructure = new MyQueue<>();
+                    break;
+                case "Stack":
+                    currentDataStructure = new MyStack<>();
+                    break;
+            }
+            outputArea.appendText("Created " + selectedStructure + "\n");
+        });
+        demonstrationPane.add(createButton, 2, 0);
+
+        operationChoiceBox = new ChoiceBox<>();
+        operationChoiceBox.getItems().addAll("Insert", "Sort", "Find", "Delete", "Get", "Set");
+        demonstrationPane.add(new Label("Choose Operation:"), 0, 1);
+        demonstrationPane.add(operationChoiceBox, 1, 1);
+
+        Button executeButton = new Button("Execute");
+        executeButton.setOnAction(e -> executeOperation());
+        demonstrationPane.add(executeButton, 2, 1);
+
         outputArea = new TextArea();
         outputArea.setEditable(false);
-        outputArea.setWrapText(true);
-        operationChoiceBox = new ChoiceBox<>();
-        operationChoiceBox.getItems().addAll("Create", "Insert", "Sort", "Find", "Delete");
-        operationChoiceBox.setValue("Create"); // Default selection
-        Button executeButton = new Button("Execute");
-        Button backButton = new Button("Back");
-
-        // Demonstration layout
-        demonstrationPane.addRow(0, new Label("Select Operation:"), operationChoiceBox, executeButton);
-        demonstrationPane.addRow(1, outputArea);
-        demonstrationLayout = new BorderPane();
-        demonstrationLayout.setCenter(demonstrationPane);
-        demonstrationLayout.setBottom(backButton);
-
-        // Set actions for buttons
-        executeButton.setOnAction(e -> executeOperation(operationChoiceBox.getValue()));
-        backButton.setOnAction(e -> showMainMenu());
+        demonstrationLayout.setCenter(outputArea);
+        demonstrationLayout.setTop(demonstrationPane);
     }
 
-    private void showMainMenu() {
-        primaryStage.setScene(new Scene(mainMenuLayout, 400, 300));
-    }
+    private void executeOperation() {
+        if (currentDataStructure == null) {
+            outputArea.appendText("Please create a data structure first.\n");
+            return;
+        }
 
-    private void showDemonstrationLayout() {
-        primaryStage.setScene(new Scene(demonstrationLayout, 600, 400));
+        String selectedOperation = operationChoiceBox.getValue();
+        switch (selectedOperation) {
+            case "Insert":
+                TextInputDialog insertDialog = new TextInputDialog();
+                insertDialog.setHeaderText("Insert Element");
+                insertDialog.setContentText("Please enter the element to insert:");
+                insertDialog.showAndWait().ifPresent(input -> {
+                    try {
+                        Integer element = Integer.parseInt(input);
+                        currentDataStructure.insert(element);
+                        outputArea.appendText("Inserted " + element + "\n");
+                    } catch (NumberFormatException e) {
+                        outputArea.appendText("Invalid input. Please enter an integer.\n");
+                    }
+                });
+                break;
+            case "Sort":
+                currentDataStructure.sort();
+                outputArea.appendText("Sorted Data Structure\n");
+                break;
+            case "Find":
+                TextInputDialog findDialog = new TextInputDialog();
+                findDialog.setHeaderText("Find Element");
+                findDialog.setContentText("Please enter the element to find:");
+                findDialog.showAndWait().ifPresent(input -> {
+                    try {
+                        Integer element = Integer.parseInt(input);
+                        int index = currentDataStructure.find(element);
+                        outputArea.appendText("Element " + element + " found at index: " + index + "\n");
+                    } catch (NumberFormatException e) {
+                        outputArea.appendText("Invalid input. Please enter an integer.\n");
+                    }
+                });
+                break;
+            case "Delete":
+                TextInputDialog deleteDialog = new TextInputDialog();
+                deleteDialog.setHeaderText("Delete Element");
+                deleteDialog.setContentText("Please enter the element to delete:");
+                deleteDialog.showAndWait().ifPresent(input -> {
+                    try {
+                        Integer element = Integer.parseInt(input);
+                        currentDataStructure.delete(element);
+                        outputArea.appendText("Deleted " + element + "\n");
+                    } catch (NumberFormatException e) {
+                        outputArea.appendText("Invalid input. Please enter an integer.\n");
+                    }
+                });
+                break;
+            case "Get":
+                TextInputDialog getDialog = new TextInputDialog();
+                getDialog.setHeaderText("Get Element");
+                getDialog.setContentText("Please enter the index:");
+                getDialog.showAndWait().ifPresent(input -> {
+                    try {
+                        int index = Integer.parseInt(input);
+                        Integer element = currentDataStructure.get(index);
+                        outputArea.appendText("Element at index " + index + " is " + element + "\n");
+                    } catch (NumberFormatException e) {
+                        outputArea.appendText("Invalid input. Please enter an integer.\n");
+                    } catch (IndexOutOfBoundsException e) {
+                        outputArea.appendText("Index out of bounds.\n");
+                    }
+                });
+                break;
+            case "Set":
+                TextInputDialog setDialog = new TextInputDialog();
+                setDialog.setHeaderText("Set Element");
+                setDialog.setContentText("Please enter the index and element to set (comma-separated):");
+                setDialog.showAndWait().ifPresent(input -> {
+                    try {
+                        String[] parts = input.split(",");
+                        if (parts.length != 2) {
+                            throw new IllegalArgumentException("Please provide both index and element.");
+                        }
+                        int index = Integer.parseInt(parts[0].trim());
+                        Integer element = Integer.parseInt(parts[1].trim());
+                        currentDataStructure.set(index, element);
+                        outputArea.appendText("Set element at index " + index + " to " + element + "\n");
+                    } catch (NumberFormatException e) {
+                        outputArea.appendText("Invalid input. Please enter valid integers.\n");
+                    } catch (IndexOutOfBoundsException e) {
+                        outputArea.appendText("Index out of bounds.\n");
+                    } catch (IllegalArgumentException e) {
+                        outputArea.appendText(e.getMessage() + "\n");
+                    }
+                });
+                break;
+        }
     }
 
     private void showHelp() {
         Alert helpAlert = new Alert(Alert.AlertType.INFORMATION);
         helpAlert.setTitle("Help");
-        helpAlert.setHeaderText("Data Structure Demonstration Help");
-        helpAlert.setContentText("This application allows you to demonstrate basic operations on List, Stack, and Queue data structures.\n\n" +
-                "1. Select a data structure from the main menu.\n" +
-                "2. In the demonstration screen, select an operation to perform (Create, Insert, Sort, Find, Delete).\n" +
-                "3. The results of the operation will be displayed in the output area.\n" +
-                "4. You can go back to the main menu at any time by clicking the Back button.");
+        helpAlert.setHeaderText("Basic Usage");
+        helpAlert.setContentText("""
+                1. Select a data structure from the dropdown.
+                2. Click 'Create' to create the selected data structure.
+                3. Choose an operation from the dropdown.
+                4. Click 'Execute' to perform the operation.
+                5. Follow the prompts to provide necessary inputs.""");
         helpAlert.showAndWait();
     }
 
-    private void confirmQuit() {
+    private void quitApplication() {
         Alert quitAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        quitAlert.setTitle("Confirm Quit");
-        quitAlert.setHeaderText("Are you sure you want to quit?");
+        quitAlert.setTitle("Quit");
+        quitAlert.setHeaderText("Confirm Quit");
+        quitAlert.setContentText("Are you sure you want to quit?");
         quitAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 primaryStage.close();
             }
         });
-    }
-
-    private void executeOperation(String operation) {
-        outputArea.clear();
-        switch (operation) {
-            case "Create":
-                createDataStructure();
-                break;
-            case "Insert":
-                insertElement();
-                break;
-            case "Sort":
-                sortDataStructure();
-                break;
-            case "Find":
-                findElement();
-                break;
-            case "Delete":
-                deleteElement();
-                break;
-        }
-    }
-
-    private void createDataStructure() {
-        outputArea.appendText("Creating data structure...\n");
-        switch (currentDataStructureType) {
-            case LIST:
-                list.clear();
-                for (int i = 1; i <= 5; i++) {
-                    list.add(i);
-                }
-                outputArea.appendText("List: " + list.toString() + "\n");
-                break;
-            case STACK:
-                stack.clear();
-                for (int i = 1; i <= 5; i++) {
-                    stack.push(i);
-                }
-                outputArea.appendText("Stack: " + stack.toString() + "\n");
-                break;
-            case QUEUE:
-                queue.clear();
-                for (int i = 1; i <= 5; i++) {
-                    queue.enqueue(i);
-                }
-                outputArea.appendText("Queue: " + queue.toString() + "\n");
-                break;
-        }
-    }
-
-    private void insertElement() {
-        outputArea.appendText("Inserting element 10...\n");
-        switch (currentDataStructureType) {
-            case LIST:
-                list.add(2, 10);
-                outputArea.appendText("List: " + list.toString() + "\n");
-                break;
-            case STACK:
-                stack.push(10);
-                outputArea.appendText("Stack: " + stack.toString() + "\n");
-                break;
-            case QUEUE:
-                queue.enqueue(10);
-                outputArea.appendText("Queue: " + queue.toString() + "\n");
-                break;
-        }
-    }
-
-    private void sortDataStructure() {
-        outputArea.appendText("Sorting data structure...\n");
-        switch (currentDataStructureType) {
-            case LIST:
-                list.sort();
-                outputArea.appendText("List: " + list.toString() + "\n");
-                break;
-            case STACK:
-                outputArea.appendText("Stack does not support sorting.\n");
-                break;
-            case QUEUE:
-                outputArea.appendText("Queue does not support sorting.\n");
-                break;
-        }
-    }
-
-    private void findElement() {
-        outputArea.appendText("Finding element 3...\n");
-        int index;
-        switch (currentDataStructureType) {
-            case LIST:
-                index = list.indexOf(3);
-                if (index != -1) {
-                    outputArea.appendText("Element 3 found at index " + index + "\n");
-                } else {
-                    outputArea.appendText("Element 3 not found\n");
-                }
-                break;
-            case STACK:
-                index = stack.search(3);
-                if (index != -1) {
-                    outputArea.appendText("Element 3 found at position " + index + " from the top of the stack\n");
-                } else {
-                    outputArea.appendText("Element 3 not found\n");
-                }
-                break;
-            case QUEUE:
-                index = queue.indexOf(3);
-                if (index != -1) {
-                    outputArea.appendText("Element 3 found at position " + index + " from the front of the queue\n");
-                } else {
-                    outputArea.appendText("Element 3 not found\n");
-                }
-                break;
-        }
-    }
-
-    private void deleteElement() {
-        outputArea.appendText("Deleting element at index 1...\n");
-        switch (currentDataStructureType) {
-            case LIST:
-                list.remove(1);
-                outputArea.appendText("List: " + list.toString() + "\n");
-                break;
-            case STACK:
-                if (!stack.isEmpty()) {
-                    stack.pop();
-                    outputArea.appendText("Stack: " + stack.toString() + "\n");
-                } else {
-                    outputArea.appendText("Stack is empty.\n");
-                }
-                break;
-            case QUEUE:
-                if (!queue.isEmpty()) {
-                    queue.dequeue();
-                    outputArea.appendText("Queue: " + queue.toString() + "\n");
-                } else {
-                    outputArea.appendText("Queue is empty.\n");
-                }
-                break;
-        }
     }
 
     public static void main(String[] args) {

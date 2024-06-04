@@ -1,36 +1,19 @@
 package DataStructure;
-public class MyStack<E extends Comparable<E>> {
-    private MyLinkedList<E> linkedList;
 
-    public MyStack() {
-        linkedList = new MyLinkedList<E>();
-    }
-
-    public void add(E element) {
-        linkedList.add(element);
-    }
-
-    public E remove() {
-        if (linkedList.size() == 0) {
-            throw new IllegalStateException("Stack is empty");
-        }
-        return linkedList.remove(linkedList.size() - 1);
-    }
-
-    public E get(int index) {
-        return linkedList.get(index);
-    }
-
-    public int size() {
-        return linkedList.size();
-    }
-
-    public void sort() {
-        linkedList.sort();
-    }
-
+public class MyStack<E extends Comparable<E>> extends MyLinkedList<E> {
     @Override
-    public String toString() {
-        return linkedList.toString();
+    public void insert(E element) {
+        push(element);
+    }
+
+    public void push(E element) {
+        super.insert(element);
+    }
+
+    public E pop() {
+        if (tail == null) return null;
+        E element = tail.element;
+        delete(element);
+        return element;
     }
 }

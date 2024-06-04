@@ -1,26 +1,10 @@
 package DataStructure;
 
-public abstract class AbstractList<E> implements List<E> {
-    protected int size = 0;
-
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public abstract void add(E element);
-
-    @Override
-    public abstract E remove(int index);
-
-    @Override
-    public abstract E get(int index);
-
-    @Override
+public abstract class AbstractList<E extends Comparable<E>> implements List<E> {
+    public abstract void insert(E element);
     public abstract void sort();
-
-    @Override
-    public abstract String toString();
+    public abstract int find(E element);
+    public abstract void delete(E element);
+    public abstract E get(int index);
+    public abstract void set(int index, E element);
 }
-
-
