@@ -1,0 +1,68 @@
+.root {
+    -fx-font-family: 'Arial';
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.main-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.main-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.create-button {
+    -fx-background-color: #1abc9c;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.create-button:hover {
+    -fx-background-color: #16a085;
+}
+
+.execute-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.execute-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+.operation-button {
+    -fx-background-color: linear-gradient(to bottom, #ff7e5f, #feb47b); /* Gradient from light to dark orange */
+    -fx-text-fill: white; /* White text */
+    -fx-padding: 10px 20px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-weight: bold; /* Bold text */
+    -fx-background-radius: 10; /* Rounded corners */
+    -fx-border-color: transparent; /* Transparent border to maintain padding */
+    -fx-border-width: 2; /* Border width */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 2, 2); /* Shadow effect */
+    -fx-cursor: hand; /* Hand cursor on hover */
+}
+
+.operation-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #feb47b, #ff7e5f); /* Reverse gradient on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 6, 0, 3, 3); /* Enhanced shadow on hover */
+}
+
+.text-area {
+    -fx-font-family: 'Consolas';
+    -fx-font-size: 14px;
+}
