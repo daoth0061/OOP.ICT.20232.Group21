@@ -1,7 +1,9 @@
 package GUI;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -249,38 +251,50 @@ public class AnimationController {
         dynamicArraySize--;
         animateDynamicArray();
     }
+
     public void sortDynamicArray() {
-        SequentialTransition st = new SequentialTransition();
+        int[] i = {1};  // Use an array to allow modification inside lambda
+        int[] j = new int[1];
+        boolean[] sortingDone = {false};
 
-        for (int i = 1; i < dynamicArraySize; i++) {
-            int j = i;
-            while (j > 0 && Integer.parseInt(dynamicArrayTextElements.get(j - 1).getText()) > Integer.parseInt(dynamicArrayTextElements.get(j).getText())) {
-                int finalJ = j;
-                PauseTransition pt = new PauseTransition(Duration.seconds(1));
-                pt.setOnFinished(e -> swapAndAnimate(finalJ - 1, finalJ));
-                st.getChildren().add(pt);
-                j--;
+        Timeline timeline = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.75), e -> {
+            if (i[0] < dynamicArraySize) {
+                j[0] = i[0];
+                if (j[0] > 0 && Integer.parseInt(dynamicArrayTextElements.get(j[0] - 1).getText()) > Integer.parseInt(dynamicArrayTextElements.get(j[0]).getText())) {
+                    swapAndAnimate(j[0] - 1, j[0]);
+                    j[0]--;
+                    i[0]--;  // Decrement i to retry the current value
+                } else {
+                    i[0]++;  // Increment i to move to the next element
+                }
+            } else if (!sortingDone[0]) {
+                sortingDone[0] = true;
+                Text animatingText = createStyledText("Sorting completed.\n");
+                animatingText.setX(50);
+                animatingText.setY(175);
+                animationPane.getChildren().add(animatingText);
+                timeline.stop();
             }
-        }
-
-        st.setOnFinished(e -> {
-            Text animatingText = createStyledText("Sorting completed.\n");
-            animatingText.setX(50);
-            animatingText.setY(175);
-            animationPane.getChildren().add(animatingText);
         });
-        st.play();
+
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     private void swapAndAnimate(int index1, int index2) {
-        Text temp = dynamicArrayTextElements.get(index1);
+        // Swap text elements
+        Text tempText = dynamicArrayTextElements.get(index1);
         dynamicArrayTextElements.set(index1, dynamicArrayTextElements.get(index2));
-        dynamicArrayTextElements.set(index2, temp);
+        dynamicArrayTextElements.set(index2, tempText);
 
+        // Swap rectangles
         Rectangle tempRect = dynamicArrayElements.get(index1);
         dynamicArrayElements.set(index1, dynamicArrayElements.get(index2));
         dynamicArrayElements.set(index2, tempRect);
 
+        // Animate the swap
         animateDynamicArray();
     }
 

@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0164244c-b539-4dc4-ba0b-92fc541f21c7" name="Changes" comment="GUI design">
-      <change afterPath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Topic1/src/main/resources/GUI/help_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Topic1/src/main/resources/GUI/proceed_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Topic1/src/main/resources/GUI/quit_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Topic1/src/main/resources/GUI/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/MyLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/MyLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/GUI/MainGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,21 +40,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.Main.executor": "Run",
-    "Application.MainGUI.executor": "Run",
-    "Application.stackqueue.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/fpt47/Downloads/Programming/Code/2023.2/OOP/OOP.ICT.20232.Group21/Topic1/src/main/resources/GUI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainGUI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.stackqueue.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/fpt47/Downloads/Programming/Code/2023.2/OOP/OOP.ICT.20232.Group21/Topic1/src/main/resources/GUI&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\fpt47\Downloads\Programming\Code\2023.2\OOP\OOP.ICT.20232.Group21\Topic1\src\main\resources\GUI" />
