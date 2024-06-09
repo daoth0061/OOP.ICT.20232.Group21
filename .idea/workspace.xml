@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0164244c-b539-4dc4-ba0b-92fc541f21c7" name="Changes" comment="GUI design">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" afterDir="false" />
-    </list>
+    <list default="true" id="0164244c-b539-4dc4-ba0b-92fc541f21c7" name="Changes" comment="GUI design" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
