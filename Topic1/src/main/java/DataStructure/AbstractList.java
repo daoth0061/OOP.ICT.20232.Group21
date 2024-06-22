@@ -7,4 +7,5 @@ public abstract class AbstractList<E extends Comparable<E>> implements List<E> {
     public abstract void delete(E element);
     public abstract E get(int index);
     public abstract void set(int index, E element);
+    public abstract int size();
 }

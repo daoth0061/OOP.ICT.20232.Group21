@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0164244c-b539-4dc4-ba0b-92fc541f21c7" name="Changes" comment="GUI design" />
+    <list default="true" id="0164244c-b539-4dc4-ba0b-92fc541f21c7" name="Changes" comment="GUI design">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/AbstractList.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/AbstractList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/MyLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/MyLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/MyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/DataStructure/MyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/GUI/AnimationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Topic1/src/main/java/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/Topic1/src/main/java/GUI/MainGUI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,11 +56,12 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/fpt47/Downloads/Programming/Code/2023.2/OOP/OOP.ICT.20232.Group21/Topic1/src/main/resources/GUI&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/fpt47/Downloads/Programming/Code/2023.2/ML/Mid-term Project Submitted&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\fpt47\Downloads\Programming\Code\2023.2\OOP\OOP.ICT.20232.Group21\Topic1\Report" />
       <recent name="D:\fpt47\Downloads\Programming\Code\2023.2\OOP\OOP.ICT.20232.Group21\Topic1\src\main\resources\GUI" />
     </key>
     <key name="MoveFile.RECENT_KEYS">

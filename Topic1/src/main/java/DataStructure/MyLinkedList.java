@@ -4,6 +4,7 @@ public class MyLinkedList<E extends Comparable<E>> extends AbstractList<E> {
     protected Node<E> head;
     protected Node<E> tail;
     protected int size;
+
     protected static class Node<E> {
         E element;
         Node<E> next;
@@ -18,7 +19,10 @@ public class MyLinkedList<E extends Comparable<E>> extends AbstractList<E> {
         tail = null;
         size = 0;
     }
-
+    @Override
+    public int size() {
+        return size;
+    }
     @Override
     public void insert(E element) {
         Node<E> newNode = new Node<>(element);

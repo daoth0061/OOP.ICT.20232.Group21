@@ -86,6 +86,10 @@ public class MyList<E extends Comparable<E>> extends AbstractList<E> {
         }
         return -1;
     }
+    @Override
+    public int size() {
+        return size;
+    }
 
     @Override
     public void delete(E element) {

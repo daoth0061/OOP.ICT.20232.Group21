@@ -399,7 +399,7 @@ public class MainGUI extends Application {
 
     private void executeOperation() {
         if (currentDataStructure == null) {
-            outputArea.appendText("Please create a data structure first.\n");
+            animationController.updateOutputArea("Please create a data structure first.\n");
             return;
         }
 
@@ -495,7 +495,12 @@ public class MainGUI extends Application {
 
     private void displayDataStructure() {
         if (currentDataStructure != null) {
-            outputArea.appendText("Current Data Structure: " + currentDataStructure + "\n");
+
+            // Append text representation of the data structure
+            outputArea.appendText("Current Data Structure:\n" + currentDataStructure.toString() + "\n");
+
+            // Display visual representation
+            animationController.displayCurrentDataStructure(currentDataStructure);
         }
     }
 
@@ -503,13 +508,12 @@ public class MainGUI extends Application {
         Alert helpAlert = new Alert(Alert.AlertType.INFORMATION);
         helpAlert.setTitle("Help");
         helpAlert.setHeaderText("Basic Usage");
-        helpAlert.setContentText("""
-                1. Select a data structure from the dropdown.
-                2. Choose a creation option and provide the number of elements.
-                3. Click 'Create' to create the selected data structure.
-                4. Choose an operation from the dropdown.
-                5. Click 'Execute' to perform the operation.
-                6. Follow the prompts to provide necessary inputs.""");
+        helpAlert.setContentText("1. Select a data structure from the dropdown.\n" +
+                                 "2. Choose a creation option and provide the number of elements.\n" +
+                                 "3. Click 'Create' to create the selected data structure.\n" +
+                                 "4. Choose an operation from the dropdown.\n" +
+                                 "5. Click 'Execute' to perform the operation.\n" +
+                                 "6. Follow the prompts to provide necessary inputs.");
         helpAlert.showAndWait();
     }
 

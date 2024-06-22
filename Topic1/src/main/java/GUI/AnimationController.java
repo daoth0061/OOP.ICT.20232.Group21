@@ -1,9 +1,9 @@
 package GUI;
 
+import DataStructure.AbstractList;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -282,6 +282,12 @@ public class AnimationController {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
+    public void updateOutputArea(String text) {
+        Text animatingText = createStyledText(text);
+        animatingText.setX(50);
+        animatingText.setY(60);
+        animationPane.getChildren().add(animatingText);
+    }
 
     private void swapAndAnimate(int index1, int index2) {
         // Swap text elements
@@ -296,6 +302,26 @@ public class AnimationController {
 
         // Animate the swap
         animateDynamicArray();
+    }
+    public void displayCurrentDataStructure(AbstractList<Integer> dataStructure) {
+        animationPane.getChildren().clear();
+        int x = 10;
+        int y = 10;
+        int width = 50;
+        int height = 30;
+        int spacing = 10;
+
+        for (int i = 0; i < dataStructure.size(); i++) {
+            int value = dataStructure.get(i);
+            Rectangle rect = new Rectangle(x, y, width, height);
+            rect.setFill(Color.LIGHTBLUE);
+            rect.setStroke(Color.BLACK);
+
+            Text text = new Text(x + 15, y + 20, String.valueOf(value));
+
+            animationPane.getChildren().addAll(rect, text);
+            x += width + spacing;
+        }
     }
 
 }
