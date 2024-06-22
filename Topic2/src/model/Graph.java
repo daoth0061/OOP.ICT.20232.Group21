@@ -38,7 +38,14 @@ public class Graph {
             adjMatrix.put(node, adjList);
         }
     }
-
+    public Node getNodeByName(String name) {
+        for (Node node : nodes) {
+            if (String.valueOf(node.getValue()).equals(name)) {
+                return node;
+            }
+        }
+        return null;
+    }
 
     private void generateNodes() {
         for (int i = 0; i < this.numsNode; i++) {
@@ -86,6 +93,17 @@ public class Graph {
             }
         }
         return adjEdges;
+    }
+
+    public Edge findEdge(Node n1, Node n2) {
+        Edge target = new Edge(0, n1, n2);
+        for (Edge edge :
+                edges) {
+            if (edge.equals(target)) {
+                return edge;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Node> getNodes() {
